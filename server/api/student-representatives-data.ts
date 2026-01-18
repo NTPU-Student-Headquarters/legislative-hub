@@ -1,6 +1,6 @@
 // server/api/student-representatives-data.ts
 // Auto-generated file - Do not edit manually
-// Last updated: 2025-12-19T21:15:35.449Z
+// Last updated: 2026-01-18T21:14:57.115Z
 
 export default defineEventHandler(() => {
   return {
@@ -803,10 +803,10 @@ export default defineEventHandler(() => {
     },
     {
       "id": "",
-      "meetingName": "會網測試委員會",
-      "representativeName": "傅冠紘"
+      "meetingName": "程式設計相關課程審議小組",
+      "representativeName": "彭冠維"
     }
   ],
-  "lastUpdated": "2025-12-19T21:15:35.449Z"
+  "lastUpdated": "2026-01-18T21:14:57.115Z"
 };
 });
