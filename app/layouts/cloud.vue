@@ -80,8 +80,8 @@ const handleLogout = async () => {
             </button>
 
             <!-- 使用者資訊 / 登出 -->
-            
             <ClientOnly>
+              <!-- 已登入：顯示使用者名稱與登出按鈕 -->
               <div v-if="loggedIn && user" class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
                 <div class="hidden md:flex flex-col items-end">
                   <span class="text-sm font-medium">{{ user.shortName }}</span>
@@ -108,9 +108,24 @@ const handleLogout = async () => {
                   <span class="material-symbols-rounded text-xl">logout</span>
                 </button>
               </div>
+
+              <!-- 未登入（理論上 middleware 應已攔截，這裡作為 fallback 保險） -->
               <div v-else class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
-                    <span>未登入</span>
+                <button
+                  @click="navigateTo('/login')"
+                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+                >
+                  <span class="material-symbols-rounded text-base">login</span>
+                  登入
+                </button>
               </div>
+
+              <!-- SSR 水合前的 loading 骨架，避免畫面閃爍 -->
+              <template #fallback>
+                <div class="pl-3 border-l border-slate-300 dark:border-slate-700">
+                  <div class="w-20 h-5 rounded bg-slate-200 dark:bg-slate-700 animate-pulse" />
+                </div>
+              </template>
             </ClientOnly>
             
           </div>
@@ -140,5 +155,5 @@ const handleLogout = async () => {
 
 <style scoped>
 /* 引入 Material Symbols */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 </style>
