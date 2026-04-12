@@ -1,13 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'cloud',
-  // 確保已登入的使用者不會再看到登入頁面
-  middleware: () => {
-    const { loggedIn } = useUserSession()
-    if (loggedIn.value) {
-      return navigateTo('/')
-    }
-  }
+  middleware: 'guest-only' // 確保已登入的使用者不會再看到登入頁面
 })
 
 const isLoggingIn = ref(false)
