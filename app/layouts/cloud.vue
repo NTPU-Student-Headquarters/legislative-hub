@@ -62,7 +62,7 @@ const handleLogout = async () => {
             
             <div class="flex flex-col min-w-0">
               <h1 class="font-bold text-lg leading-tight tracking-wide text-blue-900 dark:text-blue-100 truncate">
-                NTPU 學生自治雲
+                NTPU Congress Cloud App
               </h1>
               <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wider uppercase truncate">
                 Internal Only
