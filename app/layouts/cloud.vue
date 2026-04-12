@@ -3,11 +3,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-// 模擬使用者狀態 (實際專案會從 Pinia 或 useAuth 取得)
-/*
-const user = useUser() // 假設有一個 global composable
+// 1. 主題設定部分
 
-*/
 const isDark = ref(false)
 
 // 切換深色模式
@@ -21,15 +18,6 @@ const toggleTheme = () => {
     localStorage.setItem('theme', 'light')
   }
 }
-
-// 登出功能
-/*
-const handleLogout = async () => {
-  // await signOut() // 呼叫 Auth 模組登出
-  user.value = null
-  navigateTo('/login')
-}
-*/
 
 // 初始化主題
 onMounted(() => {
@@ -46,8 +34,19 @@ useHead({
     class: 'bg-slate-50 dark:bg-[#1b1b1f]'
   }
 })
+
+// 2. 登入登出部分
+const { user, loggedIn, clear } = useUserSession()
+
+const handleLogout = async () => {
+  await clear() // 這會呼叫後端 API 並清除前端狀態
+  navigateTo('/login')
+}
 </script>
 
+<template>
+  
+</template>
 <template>
   <div class="min-h-screen w-full flex flex-col text-slate-800 dark:text-slate-200 transition-colors duration-300 font-sans">
     
@@ -84,14 +83,15 @@ useHead({
             </button>
 
             <!-- 使用者資訊 / 登出 -->
-            <!--
+            
             <ClientOnly>
-              <div v-if="user" class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+              <div v-if="loggedIn && user" class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
                 <div class="hidden md:flex flex-col items-end">
-                  <span class="text-sm font-medium">{{ user.name }}</span>
-                  <span class="text-xs text-slate-500 dark:text-slate-400">{{ user.department }}</span>
+                  <span class="text-sm font-medium">{{ user.shortName }}</span>
+                  <!-- <span class="text-xs text-slate-500 dark:text-slate-400">{{ user.department }}</span> -->
                 </div>
                 
+                <!-- 
                 <img 
                   v-if="user.avatar" 
                   :src="user.avatar" 
@@ -101,6 +101,7 @@ useHead({
                 <div v-else class="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold">
                   {{ user.name.charAt(0) }}
                 </div>
+                 -->
                 
                 <button 
                   @click="handleLogout"
@@ -110,8 +111,11 @@ useHead({
                   <span class="material-symbols-rounded text-xl">logout</span>
                 </button>
               </div>
+              <div v-else class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+                    <span>未登入</span>
+              </div>
             </ClientOnly>
-            -->
+            
           </div>
         </div>
       </div>
