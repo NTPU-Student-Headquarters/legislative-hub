@@ -2,11 +2,16 @@
 export default defineNuxtRouteMiddleware((to) => {
   const { loggedIn } = useUserSession()
 
-  if (to.path === '/login') return
+  // 已登入的使用者試圖訪問 /login，導回首頁
+  if (to.path === '/login') {
+    if (loggedIn.value) {
+      return navigateTo('/')
+    }
+    return // 未登入就讓他正常訪問 /login
+  }
 
   // 在 server 端 session 尚未就緒時，交由 client 端再判斷一次
   if (import.meta.server) {
-    // server 端：若明確未登入才導向（有 cookie 時 loggedIn 應為 true）
     if (!loggedIn.value) {
       return navigateTo('/login', { redirectCode: 302 })
     }

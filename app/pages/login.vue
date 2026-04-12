@@ -1,7 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'cloud',
-  middleware: 'guest-only' // 確保已登入的使用者不會再看到登入頁面
+  layout: 'cloud'
+})
+useHead({
+  title: '登入',
 })
 
 const isLoggingIn = ref(false)
