@@ -57,4 +57,13 @@ export default defineNuxtConfig({
         ...siteConfig
       }
   },
+  
+  vite: {
+    optimizeDeps: {
+      include: [
+        'file-saver',
+        'docx'
+      ]
+    }
+  },
 })
