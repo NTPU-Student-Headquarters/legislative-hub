@@ -6,7 +6,7 @@ export const siteNavigation = [
     icon: Gavel,
     children: [
       { name: "同步法規", href: "/bylaws/sync" },
-      { name: "取得各式檔案", href: "/regulation" },
+      { name: "取得各式檔案", href: "/bylaws" },
     ],
   },
   {
