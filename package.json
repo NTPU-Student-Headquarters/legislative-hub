@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxt/icon": "^2.1.0",
+    "@picocss/pico": "^2.1.1",
     "docx": "^9.5.1",
     "file-saver": "^2.0.5",
     "gray-matter": "^4.0.3",
