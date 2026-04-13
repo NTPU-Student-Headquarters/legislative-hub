@@ -1,7 +1,7 @@
 /* For regulations */
 
 /* Chapters */
-div.zhangJie { 
+div.zhangJie, div.zhangJie * { 
 	font-weight: bold;
 	font-size: larger;
 }
