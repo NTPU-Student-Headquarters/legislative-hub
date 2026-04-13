@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { siteConfig } from "./config/site.config";
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { 
@@ -41,6 +44,12 @@ export default defineNuxtConfig({
     classSuffix: '', // 讓 Tailwind 的 dark: class 直接生效
     preference: 'system',
     fallback: 'light', // 當偵測不到時的預設值
-  }
-
+  },
+  
+  // 注入全域變數
+  runtimeConfig: {
+      public: {
+        ...siteConfig
+      }
+  },
 })
