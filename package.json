@@ -17,6 +17,7 @@
     "file-saver": "^2.0.5",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
+    "lucide-vue-next": "^1.0.0",
     "nuxt": "^4.2.1",
     "nuxt-auth-utils": "^0.5.29",
     "papaparse": "^5.5.3",
