@@ -85,11 +85,11 @@ const handleDownloadDocx = async () => {
   if (!currentLaw.value) return
   isGeneratingDocx.value = true
   try {
-    // 透過 $fetch 即時獲取該法規的完整資料
     const rawRegulation = await $fetch(`/api/regulation/${currentLaw.value.id}`)
     await generateAndDownloadDocx(rawRegulation)
-  } catch (err) {
-    alert('產生文件失敗，請稍後再試或回報維護小組。')
+  } catch (err: any) {
+    console.error('產生 Word 文件失敗細節:', err)
+    alert(`產生文件失敗：${err.message || '未知錯誤'}。詳細資訊請按 F12 查看主控台。`)
   } finally {
     isGeneratingDocx.value = false
   }
@@ -101,8 +101,9 @@ const handleCopyHtml = async () => {
   try {
     const rawRegulation = await $fetch(`/api/regulation/${currentLaw.value.id}`)
     await copyHtmlSourceToClipboard(rawRegulation)
-  } catch (err) {
-    alert('獲取原始碼失敗。')
+  } catch (err: any) {
+    console.error('複製 HTML 失敗細節:', err)
+    alert(`獲取原始碼失敗：${err.message || '未知錯誤'}。詳細資訊請按 F12 查看主控台。`)
   } finally {
     isCopyingHtml.value = false
   }
