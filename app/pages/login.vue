@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ShieldCheck, AlertTriangle } from 'lucide-vue-next';
+const config = useRuntimeConfig().public;
 
 definePageMeta({
   layout: 'congress'
@@ -29,7 +30,7 @@ const handleGoogleLogin = () => {
           </div>
           <hgroup>
             <h1>自治機關登入</h1>
-            <p>本系統僅限國立臺北大學學生自治會各機關使用</p>
+            <p>{{ config.name }} 僅限國立臺北大學學生自治會各機關使用</p>
           </hgroup>
         </header>
 
@@ -58,7 +59,7 @@ const handleGoogleLogin = () => {
           <div class="warning-box">
             <AlertTriangle :size="20" />
             <small>
-              非授權帳號將無法通過驗證。若官方信箱有異動，請聯絡網管小組。
+              1. 非授權帳號將無法通過驗證。若官方信箱有異動，請聯絡網管小組。<br />2. <mark>議事文件草擬</mark>系統僅限「學生議會（三峽校區）」登入使用，其他機關點選後將被直接導回首頁。
             </small>
           </div>
         </footer>
