@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRegulation } from '~/composables/useRegulation';
+import { useRegulation, type RegulationData } from '~/composables/useRegulation';
 
 definePageMeta({
   layout: 'minimal'
@@ -50,7 +50,8 @@ const id = route.params.id as string; // 強制轉型 string 避免型別錯誤
 const printTimestamp = ref('');
 
 // --- 改用 Composable (支援 SSR) ---
-const { data: regulation, pending, error } = await useRegulation(id);
+const { data: rawData, pending, error } = await useRegulation(id);
+const regulation = computed(() => rawData.value as RegulationData | null);
 
 // 用於觸發瀏覽器列印 (僅在 Client 端執行)
 function doPrint() {
@@ -65,14 +66,14 @@ onMounted(() => {
     const d = now.getDate().toString().padStart(2, '0');
     const h = now.getHours().toString().padStart(2, '0');
     const min = now.getMinutes().toString().padStart(2, '0');
-    printTimestamp.value = `臺北大學學生會法規系統 ${y}/${m}/${d} ${h}:${min} 列印`;
+    printTimestamp.value = `臺北大學學生議會法規系統 ${y}/${m}/${d} ${h}:${min} 列印`;
 })
 
 useHead({
   // 使用 computed getter 確保 title 隨資料更新
   title: () => regulation.value 
-    ? `列印「${regulation.value.titleShort}」 - 臺北大學學生會法規系統` 
-    : '載入中 - 臺北大學學生會法規系統'
+    ? `列印「${regulation.value.titleShort}」 - 臺北大學學生議會法規系統` 
+    : '載入中 - 臺北大學學生議會法規系統'
 })
 </script>
 
@@ -81,15 +82,24 @@ useHead({
  * 一般列印設定
  * ===================================
  */
+@page {
+  size: A4;
+  margin: 2cm; /* 或是依當屆學生自治會需求調整，例如 1.5cm */
+}
 
 .print-page-wrapper {
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
+  box-sizing: border-box; /* 確保 padding 不會撐開總寬度 */
   
   font-family: 'Times New Roman', '標楷體', 'DFKai-SB', serif;
   font-size: 12pt;
   line-height: 16pt;
+  
+  /* ↓↓↓ 強制長字串斷行 ↓↓↓ */
+  word-break: break-word; 
+  overflow-wrap: break-word;
 }
 
 .loading-state, .error-state {
@@ -209,19 +219,39 @@ useHead({
 }
 
 @media print {
-  .print-header {
-    display: none;
+  /* 隱藏不需要的 UI */
+  .print-header, .print-button, .loading-state, .error-state {
+    display: none !important;
   }
-  .print-button {
-    display: none;
-  }
+
+  /* 容器自適應紙張 */
   .print-page-wrapper {
-     margin: 0;
-     padding: 0;
-     max-width: 100%;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-  .loading-state, .error-state {
-      display: none; /* 列印時隱藏錯誤或載入訊息 */
+
+  /* 針對 v-html 內容：只打破死板寬度與長字串，絕對不影響空白與間距 */
+  :deep(.print-page-wrapper *) {
+    max-width: 100% !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 強制保留原本設定的「緊湊間距」，避免被其他樣式覆蓋 */
+  :deep(p.law-art-num) {
+    page-break-after: avoid;
+    margin-bottom: 0 !important;
+  }
+  
+  :deep(p.law-art-num + p.xiang) {
+    margin-top: 0 !important;
+  }
+
+  /* 避免段落跨頁被切斷 */
+  :deep(p) {
+    page-break-inside: avoid;
   }
 }
 </style>

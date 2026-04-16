@@ -1,10 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { siteConfig } from "./config/site.config";
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { 
     enabled: process.env.NODE_ENV === 'development'
    },
-  css: ['@/assets/css/regulation-format.css'],
 
   nitro: {
     preset: 'cloudflare-pages'
@@ -12,7 +14,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'NTPU 學生自治雲',
+      title: siteConfig.name,
+      titleTemplate: '%s - '+siteConfig.shortName,
       htmlAttrs: { lang: 'zh-Hant-TW', },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -38,9 +41,29 @@ export default defineNuxtConfig({
   ],
 
   colorMode: {
-    classSuffix: '', // 讓 Tailwind 的 dark: class 直接生效
+    classSuffix: '', // Tailwind: 讓 Tailwind 的 dark: class 直接生效
+    dataValue: 'theme', // Pico: 對應 Pico 的 [data-theme]
     preference: 'system',
     fallback: 'light', // 當偵測不到時的預設值
-  }
-
+  },
+  
+  css: [
+    '@/assets/css/regulation-format.css'
+  ],
+  
+  // 注入全域變數
+  runtimeConfig: {
+      public: {
+        ...siteConfig
+      }
+  },
+  
+  vite: {
+    optimizeDeps: {
+      include: [
+        'file-saver',
+        'docx'
+      ]
+    }
+  },
 })

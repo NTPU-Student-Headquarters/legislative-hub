@@ -1,7 +1,7 @@
 /* For regulations */
 
 /* Chapters */
-div.zhangJie { 
+div.zhangJie, div.zhangJie * { 
 	font-weight: bold;
 	font-size: larger;
 }
@@ -38,14 +38,15 @@ p.xiang {
 
 p.xiang:not(:only-of-type)::before {
 	counter-increment: num;
-	content: counter(num, upper-roman);
+	content: counter(num, decimal);
 	display: inline-block;
 	position: absolute;
-	left: 0em; /* -2 */
-	margin-left: 0em; /* -1 */
+	left: 0em;
+	margin-left: -0.5em;
 	text-align: right;
 	width: 2em;
 	font-family: 'Times New Roman', serif;
+	font-style: italic;
 	color:#777;
 }
 
