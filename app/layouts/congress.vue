@@ -150,6 +150,12 @@ const toggleTheme = () => {
     </div>
 </template>
 
+
+<!-- 非 scoped 好讓 Pico 樣式全域生效 -->
+<style>
+@import '@/assets/css/main.css';
+</style>
+
 <style scoped>
 .layout-wrapper {
     display: flex;
