@@ -48,8 +48,7 @@ export default defineNuxtConfig({
   },
   
   css: [
-    '@/assets/css/regulation-format.css',
-    '@/assets/css/main.css'
+    '@/assets/css/regulation-format.css'
   ],
   
   // 注入全域變數
