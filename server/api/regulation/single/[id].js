@@ -106,7 +106,7 @@ export default defineEventHandler(async (event) => {
   const paddedId = id.toString().padStart(4, '0')
   
   const config = useRuntimeConfig(event)
-  const { repo, branch, basePath } = config.legiDataSource
+  const { repo, branch, basePath } = config.public.legiDataSource
 
   try {
 

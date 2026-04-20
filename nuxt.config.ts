@@ -25,9 +25,7 @@ export default defineNuxtConfig({
         { textContent: 'JavaScript is required' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/ntpush-icon/favicon.ico' },
-        { rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180', href: '/ntpush-icon/apple-touch-icon.png' },
-        { rel: 'manifest', href: '/ntpush-icon/site.webmanifest' }
+        { rel: 'apple-touch-icon', type: 'image/png', sizes: '192x192', href: 'https://ntpusu.org/wp-content/uploads/2026/04/duck-logo_removeBg_192px.png' }
       ]
     }
   },
@@ -54,21 +52,22 @@ export default defineNuxtConfig({
   // 注入全域變數
   runtimeConfig: {
     public: {
-      ...siteConfig
+      ...siteConfig,
+      // 以下定義立法資料儲存在哪裡
+      legiDataSource: {
+        repo: 'ntpuscs/legislative-data',
+        branch: 'main',
+        
+        basePath: 'data/bylaws', // 各法規文字檔案之路徑
+        listPath: 'data/bylaw-list.json',
+        
+        workflowBasePath: '.github/workflows',
+        workflowNameReports: 'fetch-committee-reports.yml',
+        workflowNameBills: 'fetch-bills.yml',
+        workflowNameBylaws: 'fetch-bylaws.yml',
+      },
     },
-    // 以下定義立法資料儲存在哪裡，只能在 Server 端存取
-    legiDataSource: {
-      repo: 'ntpuscs/legislative-data',
-      branch: 'main',
-      
-      basePath: 'data/bylaws', // 各法規文字檔案之路徑
-      listPath: 'data/bylaw-list.json',
-      
-      workflowBasePath: '.github/workflows',
-      workflowNameReports: 'fetch-committee-reports.yml',
-      workflowNameBills: 'fetch-bills.yml',
-      workflowNameBylaws: 'fetch-bylaws.yml',
-    }
+    githubToken: '', // 請在環境變數設定
     
   },
   
