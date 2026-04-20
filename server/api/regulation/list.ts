@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
   
   const config = useRuntimeConfig(event)
-  const { repo, branch, listPath } = config.legiDataSource
+  const { repo, branch, listPath } = config.public.legiDataSource
   
   try {
     const response = await fetch(
