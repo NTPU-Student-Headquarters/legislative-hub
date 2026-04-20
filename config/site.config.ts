@@ -1,7 +1,7 @@
 // config/site.config.ts
 export const siteConfig = {
-  name: 'NTPU Student Congress Cloud',
-  shortName: 'NTPUSC Cloud',
+  name: 'NTPUSCS Legislative Hub',
+  shortName: 'ntpuscs LegiHub',
   orgName: '國立臺北大學學生議會（三峽校區）',
   orgNameEn: 'NTPU Student Congress (Sanxia)',
   orgUrl: 'https://cloud.ntpusu.org/',
