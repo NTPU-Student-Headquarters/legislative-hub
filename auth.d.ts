@@ -11,4 +11,12 @@ declare module '#auth-utils' {
   }
 }
 
+declare module 'nuxt-auth-utils' {
+  interface User {
+    email: string
+    googleName: string
+    shortName: string
+  }
+}
+
 export {}
