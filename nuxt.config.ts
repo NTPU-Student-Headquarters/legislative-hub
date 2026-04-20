@@ -25,7 +25,8 @@ export default defineNuxtConfig({
         { textContent: 'JavaScript is required' }
       ],
       link: [
-        { rel: 'apple-touch-icon', type: 'image/png', sizes: '192x192', href: 'https://ntpusu.org/wp-content/uploads/2026/04/duck-logo_removeBg_192px.png' }
+        { rel: 'apple-touch-icon', type: 'image/png', sizes: '192x192', href: 'https://ntpusu.org/wp-content/uploads/2026/04/duck-logo_removeBg_192px.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/duck-logo_removeBg_ico.ico' },
       ]
     }
   },
