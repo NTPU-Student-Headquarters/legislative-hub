@@ -4,7 +4,7 @@
 
 ## 系統整體運作架構
 
-現行法規系統由 Google Drive 共編資料夾 + [NTPU Legislative Database](https://github.com/ntpuscs/legislative-data) + 本專案 + [Sync Plugin](https://github.com/ntpusu/regulation-sync-plugin) + WordPress 會網等五個系統組成。整體運作方式可參閱 [README](../README.md) 文件。
+現行法規系統由 Google Drive 共編資料夾 + [NTPU Legislative Database](https://github.com/ntpusu/legislative-data) + 本專案 + [Sync Plugin](https://github.com/ntpusu/regulation-sync-plugin) + WordPress 會網等五個系統組成。整體運作方式可參閱 [README](../README.md) 文件。
 
 ## 壹、法規文字檔維護：完全透過 Google Drive 操作
 
@@ -14,7 +14,7 @@
 
 在資料夾中，會有多個貴機關主管之法規文字檔（以下亦稱法規檔）。
 
-法規檔名使用特定的四位數字。基本上，第一位數字代表機關，第二位數字代表法規粗分類，第三、四位數為流水號（但第二至四位數，只要不重複，貴機關可自行編列）。 **一部法規只會有一個 ID，且不可重複** ，如忘記編號對應到哪部法規，可[點此查看](https://raw.githubusercontent.com/ntpuscs/legislative-data/refs/heads/main/data/bylaw-list.json)（按 Ctrl+F 可快速搜尋），或登入 LegiHub 後，點選左側選單「法規系統」再點「取得各式檔案」，該頁面就會列出。
+法規檔名使用特定的四位數字。基本上，第一位數字代表機關，第二位數字代表法規粗分類，第三、四位數為流水號（但第二至四位數，只要不重複，貴機關可自行編列）。 **一部法規只會有一個 ID，且不可重複** ，如忘記編號對應到哪部法規，可[點此查看](https://raw.githubusercontent.com/ntpusu/legislative-data/refs/heads/main/data/bylaw-list.json)（按 Ctrl+F 可快速搜尋），或登入 LegiHub 後，點選左側選單「法規系統」再點「取得各式檔案」，該頁面就會列出。
 
 法規使用 TXT 格式儲存，請確保副檔名是 `.txt` 。您可以使用 Windows 系統內建之「記事本」軟體來開啟。
 
@@ -86,7 +86,7 @@ history:
 
 ## 貳、同步法規到 Legislative Database
 
-簡單來說，儘管法規系統基本上是在本專案 (LegiHub) 操作，但本系統的資料是儲存在 [NTPU Legislative Database](https://github.com/ntpuscs/legislative-data) 專案。
+簡單來說，儘管法規系統基本上是在本專案 (LegiHub) 操作，但本系統的資料是儲存在 [NTPU Legislative Database](https://github.com/ntpusu/legislative-data) 專案。
 
 程式約每天凌晨 2 至 4 時間，會自動從 Google Drive 同步法規檔案到該專案儲存庫，順便當作備份。因此，請避免在該段時間內，於 Google Drive 操作法規維護。
 
